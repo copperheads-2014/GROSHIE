@@ -15,6 +15,7 @@ require 'pg'
 require 'bcrypt'
 require 'active_record'
 require 'logger'
+require 'pry'
 
 require 'sinatra'
 

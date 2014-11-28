@@ -1,8 +1,28 @@
 get '/' do
   # render home page
-  @users = User.all
+  @surveys = Survey.all
 
   erb :index
+end
+
+#----------- SURVEYS ------------
+
+# get '/surveys' do
+
+
+# end
+
+get '/surveys/new' do
+  erb :'surveys/new'
+end
+
+post '/surveys' do
+  @output = params[:question]
+end
+
+get '/questions' do
+  erb :'/surveys/_question', layout: false if request.xhr?
+
 end
 
 #----------- SESSIONS -----------

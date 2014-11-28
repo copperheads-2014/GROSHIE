@@ -1,0 +1,27 @@
+<div class="container">
+<br>
+<button id="add_question"> Add a question </button>
+
+<script type="jquery/template" id="questionTmpl">
+  <li class="question">
+    <input type="text" name="survey[question]" />
+  </li>
+</script>
+
+<script type="jquery/template" id="choiceTmpl">
+  <li class="choice">
+    <label>
+      <input type="text" name="survey[question][choice]"/>
+      {{choice text}}
+    </label>
+  </li>
+</script>
+
+$(".question").eq(0).append($("#choiceTmpl").template("Answer One"))
+
+<form action="/surveys" method="post">
+
+  <input type="submit" value="create" id="submit_form">
+</form>
+
+</div>

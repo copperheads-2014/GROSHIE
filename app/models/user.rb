@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   attr_reader :entered_password
+  has_many  :surveys, foreign_key: "creator_id"
+  has_many  :completions, foreign_key: "responder_id"
+  has_many  :responses, through: :completions
 
   validates :name, :length => { :minimum => 3, :message => "must be at least 3 characters, fool!" }
   validates :entered_password, :length => { :minimum => 6 }
