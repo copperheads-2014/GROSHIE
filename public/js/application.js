@@ -34,21 +34,21 @@ $(document).ready(function () {
   // ajax auto creating fields
 
 
-  $("#questionForm").on('focusout', '.survey_title', function(e) {
-    var target = $(this)
-    var request = $.post('/surveys', target.serialize(),null,'json')
-      request.done(function(data){
-        var element = target.data('id', data.id);
-        console.log(element.data().id)
-      });
-    });
+  // $("#questionForm").on('focusout', '.survey_title', function(e) {
+  //   var target = $(this)
+  //   var request = $.post('/surveys', target.serialize(),null,'json')
+  //     request.done(function(data){
+  //       var element = target.data('id', data.id);
+  //       console.log(element.data().id)
+  //     });
+  //   });
 
-    $("#questionForm").on('focusout', '.question_body', function(e) {
-      e.preventDefault();
-      var target=$(this)
-      var request = $.post('/questions', target.serialize(),null,'json')
+    // $("#questionForm").on('focusout', '.question_body', function(e) {
+    //   e.preventDefault();
+    //   var target=$(this)
+    //   var request = $.post('/questions', target.serialize(),null,'json')
 
-    });
+    // });
 
 
 

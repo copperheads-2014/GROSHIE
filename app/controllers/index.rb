@@ -2,22 +2,30 @@ get '/' do
   # render home page
   @surveys = Survey.all
 
+
   erb :index
 end
 
 #----------- SURVEYS ------------
-
-# get '/surveys' do
-
-
-# end
 
 get '/surveys/new' do
   erb :'surveys/new'
 end
 
 post '/surveys' do
-  @survey = Survey.create(name: params[:title])
+  create_survey(params)
+  # @survey = Survey.create(name: params[:title])
+  # @output = params[:survey]
+  redirect '/'
+end
+
+get '/surveys/:id' do
+  @user = User.find(session[:user_id])
+  @survey = Survey.find(params[:id])
+
+  erb :"surveys/show"
+
+
 end
 
 get '/questions' do

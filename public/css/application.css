@@ -12,8 +12,32 @@
 }
 
 .container h1 {
-  font-size: 17pt;
+  font-size: 20pt;
+  color: white;
+}
 
+.dotted_ol  {
+  color: yellow;
+}
+
+#survey_creation {
+  text-align: center;
+  margin-right: 12%;
+}
+
+.container li {
+  display: inline-block;
+  margin-right: 80px;
+  margin-bottom: 20px;
+}
+
+.container a {
+  font-size: 1.15em;
+  color: rgb(224, 222, 174);
+  text-decoration: none;
+}
+.container a:hover{
+  color: rgb(234, 229, 97);
 }
 
 body {
