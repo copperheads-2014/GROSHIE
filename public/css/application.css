@@ -1,7 +1,7 @@
 .container {
   margin: 20px auto;
-  width: 800px;
-  padding: 0px 20px 20px 20px;
+  width: 500px;
+  padding: 5px 20px 20px 50px;
   border: 1px dotted black;
 }
 
@@ -10,8 +10,16 @@
 
 }
 
+ul {
+  list-style-type: none;
+}
+
 .answer {
   margin-left: 5%;
+}
+
+.answer_input {
+  width: 30%;
 }
 
 nav {
@@ -27,6 +35,16 @@ nav .brand, nav .brand a {
   color: #444;
   width: 60%;
   display: inline-block;
+}
+
+footer .brand {
+  margin-left: 25px;
+  font-size: 18pt;
+  text-decoration: none;
+  color: #444;
+  width: 60%;
+  display: inline-block;
+  font-weight: bold;
 }
 
 nav ul {
@@ -76,4 +94,10 @@ form.quirks {
   text-align: right;
   margin-right: 20px;
   width: 200px;
+}
+
+footer {
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
 }

@@ -11,6 +11,7 @@
   <script type="text/x-jsrender" id="questionTmpl">
     <li class="question">
       <input type="text" name="survey[]" />
+      <input class='delete_question' type='button' value='x'>
       <button class="add_answer">Add Answer</button>
       <ul></ul>
     </li>
@@ -18,7 +19,8 @@
 
   <script type="text/x-jsrender" id="answerTmpl">
     <li class="answer">
-      <input type="text" name="survey[][answer]" />
+      <input class="answer_input" type="text" name="survey[][answer][]" />
+      <input class='delete_answer' type='button' value='x'>
     </li>
   </script>
 
@@ -29,7 +31,7 @@
 
   <nav>
 
-    <div class="brand"><a href="/">Skills</a></div>
+    <div class="brand"><a href="/">Survey Gorilla</a></div>
 
     <ul>
       <% if current_user %>
@@ -40,9 +42,11 @@
         <li><a href="/users/new">Sign Up</a></li>
       <% end %>
     </ul>
-
   </nav>
 
   <%= yield %>
+  <footer>
+    <div class="brand">Groshie&#0153;</div>
+  <footer>
 </body>
 </html>
