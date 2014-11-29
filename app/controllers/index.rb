@@ -17,7 +17,7 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-    Survey.create(name: params[:title])
+  @survey = Survey.create(name: params[:title])
 end
 
 get '/questions' do
@@ -26,7 +26,7 @@ get '/questions' do
 end
 
 post '/questions' do
-  Question.create
+  Question.create(body: params[:question], survey_id: "#{@survey.id}")
 end
 
 #----------- SESSIONS -----------

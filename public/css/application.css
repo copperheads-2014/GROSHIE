@@ -1,6 +1,6 @@
 .container {
-  max-height: 480px;
-  overflow: scroll;
+/*  max-height: 480px;
+  overflow: scroll;*/
   margin: 20px auto;
   width: 500px;
   padding: 5px 20px 20px 50px;
@@ -126,7 +126,7 @@ form.quirks {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 50px;
 }

@@ -2,10 +2,10 @@ $(document).ready(function () {
 
   $(".add_question").click(function(e) {
     e.preventDefault();
-    var target=$(this)
-    var request = $.post('/questions', target.serialize(),null,'json')
+    // var target=$(this)
+    // var request = $.post('/questions', target.serialize(),null,'json')
 
-    console.log(target)
+    // console.log(target)
     $("#questionForm ol").append($.templates("#questionTmpl").render())
   });
 
@@ -33,13 +33,25 @@ $(document).ready(function () {
 
   // ajax auto creating fields
 
-  $("#questionForm").on('focusout', 'input:first-child', function(e) {
+
+  $("#questionForm").on('focusout', '.survey_title', function(e) {
     var target = $(this)
     var request = $.post('/surveys', target.serialize(),null,'json')
-  });
+      request.done(function(data){
+        var element = target.data('id', data.id);
+        console.log(element.data().id)
+      });
+    });
 
-  $("#questionForm").on('focusout', 'ol > li', function(e) {
-  });
+    $("#questionForm").on('focusout', '.question_body', function(e) {
+      e.preventDefault();
+      var target=$(this)
+      var request = $.post('/questions', target.serialize(),null,'json')
+
+    });
+
+
+
 
   // $("#questionForm").on('focusout', 'ul > li', function(e) {
   //   var request = $.ajax({url: '/answers', type: 'post'})
