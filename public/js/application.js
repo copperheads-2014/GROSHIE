@@ -2,6 +2,10 @@ $(document).ready(function () {
 
   $(".add_question").click(function(e) {
     e.preventDefault();
+    var target=$(this)
+    var request = $.post('/questions', target.serialize(),null,'json')
+
+    console.log(target)
     $("#questionForm ol").append($.templates("#questionTmpl").render())
   });
 
@@ -15,21 +19,6 @@ $(document).ready(function () {
     $(this).parent().remove()
   });
 
-  $("#questionForm").on('focusout', 'input:first-child', function(e) {
-    var request = $.ajax({url: '/surveys', type: 'post'})
-    console.log(this)
-  });
-
-  $("#questionForm").on('focusout', 'ol > li', function(e) {
-    var request = $.ajax({url: '/questions', type: 'post'})
-    console.log(this)
-  });
-
-  // $("#questionForm").on('focusout', 'ul > li', function(e) {
-  //   var request = $.ajax({url: '/answers', type: 'post'})
-  //   console.log(this)
-  // });
-
 
   $("#questionForm").on('click', '.add_answer', function(e) {
     e.preventDefault();
@@ -41,6 +30,21 @@ $(document).ready(function () {
     console.log(this)
     $(this).parent().remove()
   });
+
+  // ajax auto creating fields
+
+  $("#questionForm").on('focusout', 'input:first-child', function(e) {
+    var target = $(this)
+    var request = $.post('/surveys', target.serialize(),null,'json')
+  });
+
+  $("#questionForm").on('focusout', 'ol > li', function(e) {
+  });
+
+  // $("#questionForm").on('focusout', 'ul > li', function(e) {
+  //   var request = $.ajax({url: '/answers', type: 'post'})
+  //   console.log(this)
+  // });
 
   // send an HTTP DELETE request for the sign-out link
   $('a#sign-out').on("click", function(e) {

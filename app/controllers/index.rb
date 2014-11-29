@@ -17,13 +17,16 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-  @output = params[:survey]
-  erb :'surveys/show'
+    Survey.create(name: params[:title])
 end
 
 get '/questions' do
   erb :'/surveys/_question', layout: false if request.xhr?
 
+end
+
+post '/questions' do
+  Question.create
 end
 
 #----------- SESSIONS -----------
