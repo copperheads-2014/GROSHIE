@@ -17,7 +17,8 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-  @output = params[:question]
+  @output = params[:survey]
+  erb :'surveys/show'
 end
 
 get '/questions' do
