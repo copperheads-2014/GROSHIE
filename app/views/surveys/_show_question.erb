@@ -3,10 +3,11 @@
   <form>
   <ul>
   <% @question.choices.each do |choice| %>
-    <li><input type="radio" name="radio"> <%= choice.body %> </input> </li>
+    <li><input class="radio" type="radio" name="radio"> <%= choice.body %> </input> </li>
   <% end %>
   </ul>
   <input class="next" type="button" value="next">
   </form>
+  <p class="hidden_question_id"> <%= @question_id %> </p>
 </div>
 

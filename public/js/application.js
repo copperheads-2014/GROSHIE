@@ -1,13 +1,13 @@
 $(document).ready(function () {
 
   var get_question_index = 0
+  var survey_length;
+  var selection;
+
+  //////////////////Making the Survey//////////////////////
 
   $(".add_question").click(function(e) {
     e.preventDefault();
-    // var target=$(this)
-    // var request = $.post('/questions', target.serialize(),null,'json')
-
-    // console.log(target)
     $("#questionForm ol").append($.templates("#questionTmpl").render())
   });
 
@@ -29,43 +29,101 @@ $(document).ready(function () {
 
   $("#questionForm").on('click', '.delete_answer', function(e) {
     e.preventDefault();
-    console.log(this)
     $(this).parent().remove()
   });
 
+  //////////////////Taking the Survey//////////////////////
+
+
+  // This starts the survey, creates a completion row in the database, and moves
+  // you on to the next question.
+
+
+
+
   $(".container").on('click', '.start', function(e) {
     e.preventDefault();
-    var request = $.ajax({
-      type: "GET",
-      url: window.location.pathname + "/" + get_question_index
-    });
+
+    var request = $.get(window.location.pathname + "/" + get_question_index)
+
     request.done(function(response){
       $('.container').append(response)
-      });
+    });
+
+    var answer = {
+      name: "josh"
+    }
+
+    var request2 = $.ajax({
+                    url: window.location.pathname+"/begin",
+                    type: "POST",
+                    dataType: 'json',
+                    data: answer
+    });
+
+
+    // This sets the survey length so we can tell when to end the survey.
+    request2.done(function(response){
+      survey_length = response.length
+    });
+
     $(".start").remove()
-  })
 
-  $(".container").on('click', '.next', function(e) {
-    e.preventDefault();
-    get_question_index += 1;
-    $("#question_box").remove()
-    var request = $.ajax({
-      type: "GET",
-      url: window.location.pathname + "/" + get_question_index
-    });
-    request.done(function(response){
-      $('.container').append(response)
-      });
-
-
-    // get_question_index is defined at the top of the file.
-    // console.log(window.location.pathname + "/" + get_question_index)
-    // $.get('/surveys/')
   });
 
 
+  // Here we set the selection variable to whatever radio button is clicked on.
+  $(".container").on('click', '.radio', function(e) {
+    selection = {
+      user_selection: $(this).parent().text()
+    }
+  });
 
-  // send an HTTP DELETE request for the sign-out link
+
+  // The code for what happens when the user clicks on the next button.
+  $(".container").on('click', '.next', function(e) {
+    e.preventDefault();
+    get_question_index += 1;
+
+
+    // Ends the survey if the user is past the last question index.
+    if(get_question_index >= survey_length) {
+      var end_request = $.ajax({
+        url: window.location.pathname+"/end",
+        type: "POST"
+      });
+      end_request.done(function(response){
+        window.location.pathname="/surveys/index"
+      });
+    }
+
+
+    console.log(selection)
+    $("#question_box").remove()
+
+    var user_selection_request = $.ajax({
+                    url: window.location.pathname+"/responses",
+                    type: "POST",
+                    dataType: 'json',
+                    data: selection
+    });
+
+    var next_request = $.get(window.location.pathname + "/" + get_question_index)
+
+    next_request.done(function(response){
+      $('.container').append(response)
+    });
+
+  });
+
+  // standard ajax request:
+    // var request = $.ajax({
+    //   type: "GET",
+    //   url: window.location.pathname + "/" + get_question_index
+    // });
+
+  //////////////// send an HTTP DELETE request for the sign-out link //////////////
+
   $('a#sign-out').on("click", function(e) {
     e.preventDefault();
     var request = $.ajax({ url: $(this).attr('href'), type: 'delete' });
