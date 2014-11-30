@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  var get_question_index = 0
+
   $(".add_question").click(function(e) {
     e.preventDefault();
     // var target=$(this)
@@ -31,32 +33,37 @@ $(document).ready(function () {
     $(this).parent().remove()
   });
 
-  // ajax auto creating fields
+  $(".container").on('click', '.start', function(e) {
+    e.preventDefault();
+    var request = $.ajax({
+      type: "GET",
+      url: window.location.pathname + "/" + get_question_index
+    });
+    request.done(function(response){
+      $('.container').append(response)
+      });
+    $(".start").remove()
+  })
+
+  $(".container").on('click', '.next', function(e) {
+    e.preventDefault();
+    get_question_index += 1;
+    $("#question_box").remove()
+    var request = $.ajax({
+      type: "GET",
+      url: window.location.pathname + "/" + get_question_index
+    });
+    request.done(function(response){
+      $('.container').append(response)
+      });
 
 
-  // $("#questionForm").on('focusout', '.survey_title', function(e) {
-  //   var target = $(this)
-  //   var request = $.post('/surveys', target.serialize(),null,'json')
-  //     request.done(function(data){
-  //       var element = target.data('id', data.id);
-  //       console.log(element.data().id)
-  //     });
-  //   });
-
-    // $("#questionForm").on('focusout', '.question_body', function(e) {
-    //   e.preventDefault();
-    //   var target=$(this)
-    //   var request = $.post('/questions', target.serialize(),null,'json')
-
-    // });
+    // get_question_index is defined at the top of the file.
+    // console.log(window.location.pathname + "/" + get_question_index)
+    // $.get('/surveys/')
+  });
 
 
-
-
-  // $("#questionForm").on('focusout', 'ul > li', function(e) {
-  //   var request = $.ajax({url: '/answers', type: 'post'})
-  //   console.log(this)
-  // });
 
   // send an HTTP DELETE request for the sign-out link
   $('a#sign-out').on("click", function(e) {

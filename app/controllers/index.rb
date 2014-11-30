@@ -19,14 +19,8 @@ post '/surveys' do
   redirect '/'
 end
 
-get '/surveys/:id' do
-  @user = User.find(session[:user_id])
-  @survey = Survey.find(params[:id])
-
-  erb :"surveys/show"
 
 
-end
 
 get '/questions' do
   erb :'/surveys/_question', layout: false if request.xhr?
@@ -35,6 +29,36 @@ end
 
 post '/questions' do
   Question.create(body: params[:question], survey_id: "#{@survey.id}")
+end
+
+get '/surveys/:id' do
+  @user = User.find(session[:user_id])
+  @survey = Survey.find(params[:id])
+
+  erb :"surveys/show"
+
+end
+
+
+get '/surveys/:id/:question_index' do
+
+  # if request.xhr?
+    # binding.pry
+    # index = params[:question_index].to_i
+    # @survey = Survey.find(params[:id])
+
+    # @question = @survey.questions[index].body
+    # binding.pry
+    if request.xhr?
+      # binding.pry
+      index = params[:question_index].to_i
+      @survey = Survey.find(params[:id])
+      @question = @survey.questions[index]
+      erb :"surveys/_show_question", layout: false
+    end
+    # return "hello"
+  # end
+
 end
 
 #----------- SESSIONS -----------

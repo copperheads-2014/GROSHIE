@@ -1,0 +1,12 @@
+<div id="question_box">
+  <h2><%= @question.body %></h2>
+  <form>
+  <ul>
+  <% @question.choices.each do |choice| %>
+    <li><input type="radio" name="radio"> <%= choice.body %> </input> </li>
+  <% end %>
+  </ul>
+  <input class="next" type="button" value="next">
+  </form>
+</div>
+
