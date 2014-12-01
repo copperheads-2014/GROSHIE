@@ -17,10 +17,10 @@ helpers do
     @completion = Completion.where(responder_id: @user.id, survey_id: @survey.id).last
   end
 
-  # I KNOW THIS SUCKS, BUT YOU KNOW WHAT? YOU SUCK.
+  # I KNOW THIS SUCKS
   def create_survey(params)
     current_user
-    @survey = Survey.create(name: params['title'])
+    @survey = Survey.create(name: params['title'], active: true)
     @user.surveys << @survey
 
     params['survey'][0]['question'].each do |element|

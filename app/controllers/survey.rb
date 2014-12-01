@@ -18,6 +18,16 @@ get '/my_surveys/show' do
   erb :"surveys/user_show"
 end
 
+
+post '/my_surveys/toggle' do
+  @survey = Survey.find(params[:survey_id])
+  if @survey.active == true
+    @survey.update(active: false)
+  else
+    @survey.update(active: true)
+  end
+end
+
 get '/questions' do
   erb :'/surveys/_question', layout: false if request.xhr?
 end

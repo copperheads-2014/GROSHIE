@@ -1,8 +1,18 @@
 <div class="container">
   <h1><%=@user.name%>'s surveys</h1>
-  <ul>
+  <ul class="admin_surveys">
+    <table id ="table_stats">
     <%@user.surveys.each do |survey|%>
-      <li><%=survey.name%><a href="../statistics/<%=survey.id%>"> stats</a></li>
+    <tr>
+      <li class="admin_survey_list_item">
+      <td><%=survey.name%></td>
+      <td><a href="../statistics/<%=survey.id%>"> stats</a></td>
+      <input type="hidden" class="survey_id" name="survey_id" value="<%= survey.id %>">
+      <td class="active_survey_status">active: <%=survey.active%></td>
+      <td> <button class="toggle_survey"> Toggle </button> </td>
+      </li>
+    </tr>
     <%end%>
+  </table>
   </ul>
 </div>

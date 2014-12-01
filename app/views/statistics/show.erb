@@ -4,8 +4,8 @@
     <%@survey.questions.each do |question|%>
       <li><%=question.body%></li>
       <ul>
-        <%question.choices.each do |choice| %>
-        <li><%=choice.body%>: &nbsp;&nbsp;&nbsp;<%=question.assign_percentage(choice)%>%</li>
+        <% question.choices.each do |choice| %>
+          <li> <%=choice.body%>: <%= "#{(question.assign_percentage(choice))}%" if question.num_of_votes > 0 %> </li>
         <% end %>
       </ul>
     <%end%>

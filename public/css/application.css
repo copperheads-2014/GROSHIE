@@ -8,6 +8,10 @@
   background-image: url("../images/SG_BG2.png");
 }
 
+#table_stats {
+  width: 100%;
+}
+
 .container h1 {
   font-size: 20pt;
   color: white;

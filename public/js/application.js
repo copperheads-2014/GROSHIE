@@ -33,6 +33,29 @@ $(document).ready(function () {
     $(this).parent().remove()
   });
 
+
+  //////////////////Making the Survey Inactive//////////////////////
+
+  $(".admin_surveys").on('click', '.toggle_survey', function(e) {
+    e.preventDefault();
+    var survey_to_toggle = {}
+    var $active_survey = $(this).parent().siblings().eq(3);
+    survey_to_toggle.survey_id = $(this).parent().siblings().eq(2).val();
+    var deactivate_request = $.ajax({
+      url: '/my_surveys/toggle',
+      type: 'post',
+      dataType: 'json',
+      data: survey_to_toggle
+    });
+    if ($active_survey.text() == "active: true") {
+        $active_survey.text("active: false");
+      }
+      else {
+        $active_survey.text("active: true");
+      }
+
+  });
+
   //////////////////Taking the Survey//////////////////////
 
   // **** START BUTTON CODE BEGIN **** //
@@ -86,8 +109,8 @@ $(document).ready(function () {
     e.preventDefault();
 
     if (selection.user_selection == "") {
-      $('.next').after('             ERROR. YOU MUST SELECT A BUTTON, HUMAN.')
-      console.log("YOU MUST SELECT A BUTTON, HUMAN");
+      alert("ERROR. YOU MUST SELECT A BUTTON, HUMAN.")
+      // $('.next').after('             ERROR. YOU MUST SELECT A BUTTON, HUMAN.')
       callbacks.disable()
     }
 
@@ -108,7 +131,7 @@ $(document).ready(function () {
     }
 
 
-    console.log(selection)
+    // console.log(selection)
 
 
     $("#question_box").remove()
