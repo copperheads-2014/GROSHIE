@@ -13,12 +13,23 @@ post '/surveys' do
   redirect '/'
 end
 
+get '/my_surveys/show' do
+  current_user
+  erb :"surveys/user_show"
+end
+
 get '/questions' do
   erb :'/surveys/_question', layout: false if request.xhr?
 end
 
 post '/questions' do
   Question.create(body: params[:question], survey_id: "#{@survey.id}")
+end
+
+get '/statistics/:id' do
+  @survey = Survey.find(params[:id])
+
+  erb :"statistics/show"
 end
 
 get '/surveys/:id' do
@@ -29,7 +40,6 @@ end
 
 post '/surveys/:id/begin' do
   find_user_and_survey
-  # binding.pry
   @user.completions << Completion.create(started_at: Time.now, survey_id: @survey.id)
   content_type :json
   {length: @survey.questions.length}.to_json
@@ -43,8 +53,14 @@ post '/surveys/:id/end' do
 end
 
 post '/surveys/:id/responses' do
-  find_user_and_survey
-  find_completion
+  # unless params[:user_selection] == ""
+    find_user_and_survey
+    find_completion
+    @question = @survey.questions.find(params[:question_id])
+    choice = params[:user_selection].strip
+    @choice = @question.choices.find_by(body: choice)
+    @completion.responses << Response.create(choice_id: @choice.id)
+  # end
   # @completion.responses << Response.create(choice_id: )
 end
 

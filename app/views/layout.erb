@@ -44,6 +44,7 @@
       <% if current_user %>
         <li><a id="sign-out" href="/sessions/<%= current_user.id %>">Sign Out</a></li>
         <li><a id="new-survey" href="/surveys/new">New Survey</a></li>
+        <li><a href="/my_surveys/show">My Surveys</a></li>
       <% else %>
         <li><a href="/sessions/new">Sign In</a></li>
         <li><a href="/users/new">Sign Up</a></li>

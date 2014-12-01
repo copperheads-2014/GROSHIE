@@ -26,11 +26,11 @@
   margin-right: 12%;
 }
 
-.container li {
+./*container li {
   display: inline-block;
   margin-right: 80px;
   margin-bottom: 20px;
-}
+}*/
 
 .container a {
   font-size: 1.15em;
@@ -66,12 +66,14 @@ ol > li:before {
 ol {
   color: white;
 }
-.answer {
+
+/*.answer {
   margin-left: 5%;
-}
+}*/
 
 .answer_input {
-  width: 30%;
+  width: 36.5%;
+  margin-bottom: 10px;
 }
 
 nav {
@@ -86,7 +88,7 @@ nav .brand, nav .brand a {
   font-size: 18pt;
   text-decoration: none;
   color: #444;
-  width: 60%;
+  width: 55%;
   display: inline-block;
 }
 
@@ -103,7 +105,7 @@ footer .brand {
 
 nav ul {
   display: inline-block;
-  width: 30%;
+  width: 35%;
   text-align: right;
 }
 
@@ -126,7 +128,7 @@ form label {
   margin-right: 20px;
 }
 
-input {
+.question_body {
   margin-bottom: 10px;
 }
 

@@ -2,7 +2,8 @@ $(document).ready(function () {
 
   var get_question_index = 0
   var survey_length;
-  var selection;
+  var selection = {};
+  selection.user_selection = "";
 
   //////////////////Making the Survey//////////////////////
 
@@ -34,12 +35,9 @@ $(document).ready(function () {
 
   //////////////////Taking the Survey//////////////////////
 
-
+  // **** START BUTTON CODE BEGIN **** //
   // This starts the survey, creates a completion row in the database, and moves
   // you on to the next question.
-
-
-
 
   $(".container").on('click', '.start', function(e) {
     e.preventDefault();
@@ -71,20 +69,32 @@ $(document).ready(function () {
 
   });
 
+  // **** START BUTTON CODE END **** //
+
 
   // Here we set the selection variable to whatever radio button is clicked on.
   $(".container").on('click', '.radio', function(e) {
-    selection = {
-      user_selection: $(this).parent().text()
-    }
+    selection.user_selection = $(this).parent().text();
   });
 
 
+
+  // **** NEXT BUTTON CODE BEGIN **** //
   // The code for what happens when the user clicks on the next button.
+
   $(".container").on('click', '.next', function(e) {
     e.preventDefault();
-    get_question_index += 1;
 
+    if (selection.user_selection == "") {
+      $('.next').after('             ERROR. YOU MUST SELECT A BUTTON, HUMAN.')
+      console.log("YOU MUST SELECT A BUTTON, HUMAN");
+      callbacks.disable()
+    }
+
+    // console.log($(".radio").prop("checked", true))
+
+    get_question_index += 1;
+    selection.question_id = $(".question_id").attr('value')
 
     // Ends the survey if the user is past the last question index.
     if(get_question_index >= survey_length) {
@@ -99,14 +109,21 @@ $(document).ready(function () {
 
 
     console.log(selection)
+
+
     $("#question_box").remove()
 
+    // This posts to the /surveys/:id/responses path the user selection request.
+    // We still need to grab
     var user_selection_request = $.ajax({
                     url: window.location.pathname+"/responses",
                     type: "POST",
                     dataType: 'json',
-                    data: selection
+                    data: selection,
+                    success: function (data) {}
     });
+
+    selection.user_selection = "";
 
     var next_request = $.get(window.location.pathname + "/" + get_question_index)
 
@@ -115,6 +132,8 @@ $(document).ready(function () {
     });
 
   });
+
+  // **** NEXT BUTTON CODE END **** //
 
   // standard ajax request:
     // var request = $.ajax({

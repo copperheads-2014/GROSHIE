@@ -6,8 +6,8 @@
     <li><input class="radio" type="radio" name="radio"> <%= choice.body %> </input> </li>
   <% end %>
   </ul>
+  <input type="hidden" class="question_id" name="question_id" value="<%= @question_id %>">
   <input class="next" type="button" value="next">
   </form>
-  <p class="hidden_question_id"> <%= @question_id %> </p>
 </div>
 

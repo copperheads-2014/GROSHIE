@@ -19,7 +19,7 @@ helpers do
 
   # I KNOW THIS SUCKS, BUT YOU KNOW WHAT? YOU SUCK.
   def create_survey(params)
-    @user = User.find(session[:user_id])
+    current_user
     @survey = Survey.create(name: params['title'])
     @user.surveys << @survey
 

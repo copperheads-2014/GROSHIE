@@ -1,0 +1,13 @@
+<div class="container">
+  <h1><%=@survey.name%></h1>
+  <ul>
+    <%@survey.questions.each do |question|%>
+      <li><%=question.body%></li>
+      <ul>
+        <%question.choices.each do |choice| %>
+        <li><%=choice.body%>: &nbsp;&nbsp;&nbsp;<%=question.assign_percentage(choice)%>%</li>
+        <% end %>
+      </ul>
+    <%end%>
+  </ul>
+</div>
