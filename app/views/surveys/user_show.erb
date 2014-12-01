@@ -8,8 +8,7 @@
       <td><%=survey.name%></td>
       <td><a href="../statistics/<%=survey.id%>"> stats</a></td>
       <input type="hidden" class="survey_id" name="survey_id" value="<%= survey.id %>">
-      <td class="active_survey_status">active: <%=survey.active%></td>
-      <td> <button class="toggle_survey"> Toggle </button> </td>
+      <td> <button class="toggle_survey"><%= survey.active == true ? "Deactivate" : "Activate" %></button> </td>
       </li>
     </tr>
     <%end%>

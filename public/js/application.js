@@ -39,20 +39,22 @@ $(document).ready(function () {
   $(".admin_surveys").on('click', '.toggle_survey', function(e) {
     e.preventDefault();
     var survey_to_toggle = {}
-    var $active_survey = $(this).parent().siblings().eq(3);
+    console.log($(this).parent().siblings())
     survey_to_toggle.survey_id = $(this).parent().siblings().eq(2).val();
+
+    if ($(this).text() == "Deactivate") {
+      $(this).text("Activate");
+    }
+    else {
+      $(this).text("Deactivate");
+    }
+
     var deactivate_request = $.ajax({
       url: '/my_surveys/toggle',
       type: 'post',
       dataType: 'json',
       data: survey_to_toggle
     });
-    if ($active_survey.text() == "active: true") {
-        $active_survey.text("active: false");
-      }
-      else {
-        $active_survey.text("active: true");
-      }
 
   });
 
